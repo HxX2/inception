@@ -1,0 +1,19 @@
+#-----------------------#
+#   Inception Ignores   #
+#-----------------------#
+
+# vscode
+.vscode
+README.md
+.DS_Store
+
+# make
+a.out
+*.o
+
+# c++ debuger
+*.dSYM
+ft*.out
+
+# other
+.env
