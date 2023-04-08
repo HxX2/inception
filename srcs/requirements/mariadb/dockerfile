@@ -1,0 +1,13 @@
+FROM debian:buster
+
+#install meriaDB
+RUN apt update && apt install -y mariadb-server
+
+#copy mariadb init script
+COPY ./tools/init_db.sh /tmp/init_db.sh
+
+#give execution rights
+RUN chmod +x /tmp/init_db.sh
+
+#runing the script
+CMD [ "/tmp/init_db.sh" ]

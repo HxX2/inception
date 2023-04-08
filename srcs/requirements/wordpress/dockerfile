@@ -5,3 +5,12 @@ RUN apt update && apt install -y php php-fpm php-mysql php-mbstring php-zip php-
 
 #install wp-cli
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+
+#copy wordpress script
+COPY ./tools/init_wp.sh /tmp/init_wp.sh
+
+#give execution rights
+RUN chmod +x /tmp/init_wp.sh
+
+#runing the script
+CMD [ "/tmp/init_wp.sh" ]
