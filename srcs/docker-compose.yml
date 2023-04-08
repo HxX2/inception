@@ -11,41 +11,44 @@ services:
       - wordpress
     networks:
       - inception_network
+    restart: always
 
   wordpress:
     container_name: wordpress
     build: requirements/wordpress
     volumes:
-      - wp_data:/var/www/html
+      - wp_data:/var/www
     networks:
       - inception_network
     env_file:
       - .env
     depends_on:
       - mariadb
+    restart: always
 
-    mariadb:
-      container_name: mariadb
-      image: mariadb:latest
-      volumes:
-        - db_data:/var/lib/mysql
-      networks:
-        - inception_network
-      env_file:
-        - .env
+  mariadb:
+    container_name: mariadb
+    build: requirements/mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - inception_network
+    env_file:
+      - .env
+    restart: always
   
 volumes:
   wp_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/zlafou/wordpress
+      device: /Users/zlafou/incep_data/wordpress
       o: bind
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/zlafou/mariadb
+      device: /Users/zlafou/incep_data/mariadb
       o: bind
 
 networks:
