@@ -1,15 +1,17 @@
 all:
 	@docker-compose -f srcs/docker-compose.yml up --build
 
-stop:
+down:
 	@docker-compose -f srcs/docker-compose.yml down
 
 clean:
 	@docker rm -f $(docker ps -a -q)
 
 fclean:
-	@docker system prune -a -f
 	@docker volume rm -f $(docker volume ls -q) &> /dev/null ; true
+	@docker system prune -a -f
 	@docker network prune -f
+	@rm -rf /Users/zlafou/incep_data/wordpress/*
+	@rm -rf /Users/zlafou/incep_data/mariadb/*
 
 re: fclean all

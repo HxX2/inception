@@ -1,3 +1,4 @@
+version: "3.3"
 
 services:
   nginx:
@@ -6,7 +7,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wp_data:/var/www/html
+      - wp_data:/var/www/
     depends_on:
       - wordpress
     networks:
@@ -17,7 +18,7 @@ services:
     container_name: wordpress
     build: requirements/wordpress
     volumes:
-      - wp_data:/var/www
+      - wp_data:/var/www/
     networks:
       - inception_network
     env_file:
@@ -39,17 +40,17 @@ services:
   
 volumes:
   wp_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /Users/zlafou/incep_data/wordpress
-      o: bind
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: /Users/zlafou/incep_data/wordpress
+    #   o: bind
   db_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /Users/zlafou/incep_data/mariadb
-      o: bind
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: /Users/zlafou/incep_data/mariadb
+    #   o: bind
 
 networks:
   inception_network:
