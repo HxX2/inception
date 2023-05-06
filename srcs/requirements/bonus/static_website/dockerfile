@@ -1,0 +1,13 @@
+FROM debian:buster
+
+RUN apt update -y && apt install -y nodejs npm
+
+COPY tools/html /var/www/html
+
+COPY tools/server /server
+
+WORKDIR /server
+
+RUN npm i express
+
+CMD [ "node", "app.js" ]

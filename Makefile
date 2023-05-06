@@ -4,6 +4,9 @@ all:
 down:
 	@docker-compose -f srcs/docker-compose.yml down
 
+build:
+	@docker-compose -f srcs/docker-compose.yml build
+
 clean:
 	@docker rm -f $(docker ps -a -q)
 

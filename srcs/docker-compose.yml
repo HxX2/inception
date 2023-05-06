@@ -37,6 +37,20 @@ services:
     env_file:
       - .env
     restart: always
+
+  static_website:
+    container_name: static_website
+    build: requirements/bonus/static_website
+    restart: always
+    networks:
+      - inception_network
+
+  adminer:
+    container_name: adminer
+    build: requirements/bonus/adminer
+    restart: always
+    networks:
+      - inception_network
   
 volumes:
   wp_data:
