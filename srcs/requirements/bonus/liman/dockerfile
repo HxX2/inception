@@ -1,0 +1,17 @@
+FROM debian:buster
+
+RUN apt update -y && apt install -y nodejs npm git ca-certificates curl
+
+RUN curl -sSL https://get.docker.com/ | sh
+
+RUN git clone https://github.com/HxX2/liman
+
+RUN npm install --global yarn
+
+WORKDIR /liman
+
+RUN yarn install --production
+
+EXPOSE 5000
+
+CMD /liman/bin/www

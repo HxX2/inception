@@ -41,16 +41,52 @@ services:
   static_website:
     container_name: static_website
     build: requirements/bonus/static_website
-    restart: always
     networks:
       - inception_network
+    restart: always
 
   adminer:
     container_name: adminer
     build: requirements/bonus/adminer
-    restart: always
     networks:
       - inception_network
+    depends_on:
+      - mariadb
+    restart: always
+
+  redis:
+    container_name: redis
+    build: requirements/bonus/redis
+    networks:
+      - inception_network
+    restart: always
+
+  ftp:
+    container_name: ftp
+    build: requirements/bonus/ftp
+    ports:
+      - "21:21"
+      - "40000-40100:40000-40100"
+    depends_on:
+      - wordpress
+    volumes:
+      - wp_data:/content
+    networks:
+      - inception_network
+    env_file:
+      - .env
+
+  liman:
+    container_name: liman
+    build: requirements/bonus/liman
+    ports:
+      - "5000:5000"
+    networks:
+      - inception_network
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - liman:/liman/data
   
 volumes:
   wp_data:
@@ -65,6 +101,7 @@ volumes:
     #   type: none
     #   device: /Users/zlafou/incep_data/mariadb
     #   o: bind
+  liman:
 
 networks:
   inception_network:
