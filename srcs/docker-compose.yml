@@ -2,6 +2,8 @@ version: "3.3"
 
 services:
   nginx:
+    image: nginx
+    pull_policy: never
     container_name: nginx
     build: requirements/nginx
     ports:
@@ -15,6 +17,8 @@ services:
     restart: always
 
   wordpress:
+    image: wordpress
+    pull_policy: never
     container_name: wordpress
     build: requirements/wordpress
     volumes:
@@ -28,6 +32,8 @@ services:
     restart: always
 
   mariadb:
+    image: mariadb
+    pull_policy: never
     container_name: mariadb
     build: requirements/mariadb
     volumes:
@@ -39,6 +45,8 @@ services:
     restart: always
 
   static_website:
+    image: static_website
+    pull_policy: never
     container_name: static_website
     build: requirements/bonus/static_website
     networks:
@@ -46,6 +54,8 @@ services:
     restart: always
 
   adminer:
+    image: adminer
+    pull_policy: never
     container_name: adminer
     build: requirements/bonus/adminer
     networks:
@@ -55,6 +65,8 @@ services:
     restart: always
 
   redis:
+    image: redis
+    pull_policy: never
     container_name: redis
     build: requirements/bonus/redis
     networks:
@@ -62,6 +74,8 @@ services:
     restart: always
 
   ftp:
+    image: ftp
+    pull_policy: never
     container_name: ftp
     build: requirements/bonus/ftp
     ports:
@@ -77,6 +91,8 @@ services:
       - .env
 
   liman:
+    image: liman
+    pull_policy: never
     container_name: liman
     build: requirements/bonus/liman
     ports:
@@ -90,17 +106,17 @@ services:
   
 volumes:
   wp_data:
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   device: /Users/zlafou/incep_data/wordpress
-    #   o: bind
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/zlafou/incep_data/wordpress
+      o: bind
   db_data:
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   device: /Users/zlafou/incep_data/mariadb
-    #   o: bind
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/zlafou/incep_data/mariadb
+      o: bind
   liman:
 
 networks:
