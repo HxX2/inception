@@ -109,13 +109,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/zlafou/incep_data/wordpress
+      device: /home/zlafou/data/wordpress
       o: bind
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/zlafou/incep_data/mariadb
+      device: /home/zlafou/data/mariadb
       o: bind
   liman:
 
