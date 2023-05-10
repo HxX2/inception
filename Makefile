@@ -1,20 +1,39 @@
-all:
-	@docker-compose -f srcs/docker-compose.yml up --build
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/10 16:57:26 by zlafou            #+#    #+#              #
+#    Updated: 2023/05/10 19:52:48 by zlafou           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+run:
+	@docker compose -f srcs/docker-compose.yml up --build
 
 down:
-	@docker-compose -f srcs/docker-compose.yml down
+	@docker compose -f srcs/docker-compose.yml down
 
 build:
-	@docker-compose -f srcs/docker-compose.yml build
+	@docker compose -f srcs/docker-compose.yml build
 
-clean:
-	@docker rm -f $(docker ps -a -q)
+down_v:
+	@docker compose -f srcs/docker-compose.yml down -v
 
-fclean:
-	@docker volume rm -f $(docker volume ls -q) &> /dev/null ; true
+down_i:
+	@docker compose -f srcs/docker-compose.yml down --rmi all
+
+down_n:
+	@docker compose -f srcs/docker-compose.yml down --remove-orphans
+
+down_all:
+	@docker compose -f srcs/docker-compose.yml down -v --rmi all --remove-orphans
+
+clean_all: down_v
 	@docker system prune -a -f
-	@docker network prune -f
-	@rm -rf /Users/zlafou/incep_data/wordpress/*
-	@rm -rf /Users/zlafou/incep_data/mariadb/*
 
-re: fclean all
+re: down_all run
+
+re_clean: clean_all run
