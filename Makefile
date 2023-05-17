@@ -6,7 +6,7 @@
 #    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 16:57:26 by zlafou            #+#    #+#              #
-#    Updated: 2023/05/10 19:52:48 by zlafou           ###   ########.fr        #
+#    Updated: 2023/05/17 18:06:50 by zlafou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ down_all:
 
 clean_all: down_v
 	@docker system prune -a -f
+	@rm -rf /home/zlafou/data/wordpress/* /home/zlafou/data/mysql/* 
 
 re: down_all run
 
